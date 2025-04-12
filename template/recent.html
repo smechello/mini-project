@@ -1,0 +1,40 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block main %}
+<style>
+    .container {
+        background: rgba(255, 255, 255, 0.205);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        margin-left: 200px;
+        margin-top: 100px;
+    }
+    h2 {
+        text-align: center;
+    }
+    .alert {
+        background: #ffdddd;
+        padding: 10px;
+        margin: 10px 0;
+        border-left: 5px solid red;
+        color: black;
+    }
+    .alert strong {
+        display: block;
+    }
+</style>
+<div class="container">
+    <h2>Recent Alerts</h2>
+    {% for item in info %}
+        <div class="alert">
+            <strong>{{ item.raise_by.username }}:</strong>
+            <p>{{ item.message }}</p>
+            <small>{{ item.created_at }}</small>
+        </div>
+    {% empty %}
+        <p>No alerts available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block main %}
+<style>
+    /* General Styles */
+    .inFormBackground {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        margin: 0;
+    }
+    .inLoginForm {
+        background-color:  #ff5f5f41;
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.836);
+        max-width: 400px;
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .inputGroup {
+        margin-bottom: 20px;
+    }
+
+    .inputGroup label {
+        display: block;
+        margin-bottom: 8px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .inputGroup input {
+        width: 94%;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 14px;
+        transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .inputGroup input:focus {
+        border-color: #181817;
+        background: rgba(255, 255, 255, 0.2);
+        outline: none;
+    }
+    .inputGroup input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .submitForm {
+        width: 100%;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .submitForm:hover {
+        background: rgba(0, 0, 0, 0.959);
+        transform: translateY(-2px);
+    }
+    .submitForm:active {
+        transform: translateY(0);
+    }
+
+    p {
+        margin-top: 15px;
+    }
+    p a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+        margin: 0;
+    }
+    p a:hover {
+        color: rgba(0, 0, 0, 0.8);
+    }
+    .message {
+        text-align: center;
+        color: #0345d3;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    h2 {
+        text-align: center;
+        color: #ff5f5f; /* Red for headings */
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    @media (max-width: 600px) {
+        .inFormBackground {
+            padding: 10px;
+        }
+        .inLoginForm {
+            padding: 20px;
+        }
+        .inputGroup input {
+            padding: 10px;
+        }
+        .submitForm {
+            padding: 10px;
+        }
+    }
+</style>
+<div class="inFormBackground">
+    <div class="inLoginForm">
+        <h2>Sign IN</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="message">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <div class="form-columns">
+                <div class="inputGroup">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter Username" required>
+                </div>
+                <div class="inputGroup">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                </div>
+                <p><a href="{% url 'password_reset' %}">Forgot password ...?</a></p>
+            </div>
+            <button class="submitForm">login </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
