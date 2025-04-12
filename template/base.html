@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Dashboard UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px 5%;
+      text-align: center;
+      margin-top: 20px;
+      backdrop-filter: blur(10px);
+  }
+  h1{
+    color: #0581f5;
+  }
+  .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+  }
+
+  .footer-content div {
+      margin: 10px 0;
+  }
+
+  .social-links a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+  }
+
+  .social-links a:hover {
+      color: #00b5fd;
+  }
+
+  .contact-info a, .contact-info span {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+  }
+
+  .footer-bottom {
+      margin-top: 20px;
+      font-size: 0.9rem;
+  }
+  /* Width of the scrollbar */
+  ::-webkit-scrollbar {
+      width: 1px;
+  }
+
+  /* Track (background) */
+  ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+      border-radius: 10px;
+  }
+
+  /* Handle (the draggable part) */
+  ::-webkit-scrollbar-thumb {
+      background: #888; 
+      border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+  }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://static.vecteezy.com/system/resources/previews/035/149/907/large_2x/ai-generated-conceptual-image-of-a-natural-disaster-with-a-burning-city-in-the-background-world-collapse-doomsday-scene-digital-painting-ai-generated-free-photo.jpg');
+      background-position:center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #ffffff;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before { 
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 10, 0.459);
+      z-index: 0;
+    }
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .dashboard-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: rgba(23, 42, 58, 0.9); /* Dark blue-gray for a stormy feel */
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.911);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .sidebar h2 {
+      color: #ff5f5f; /* Red for urgency/alerts */
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .sidebar ul li {
+      margin: 15px 0;
+      animation: slideIn 0.5s ease-in-out;
+    }
+    
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #ccc; /* Light gray for readability */
+      font-size: 18px;
+      transition: color 0.3s, transform 0.3s, background-color 0.3s;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+      position: relative;
+    }
+    
+    .sidebar ul li a:hover {
+      color: #ff5f5f; /* Red for hover effect */
+      background-color: rgba(255, 95, 95, 0.1); /* Semi-transparent red background */
+      transform: translateX(10px);
+    }
+    
+    /* Add a subtle glow effect for a high-tech feel */
+    .sidebar ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 5px;
+      height: 100%;
+      background-color: #ff5f5f;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s, left 0.3s;
+    }
+    
+    .sidebar ul li a:hover::before {
+      opacity: 1;
+      left: 0;
+    }
+    
+    /* Add a pulsating effect to the sidebar heading for urgency */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    .sidebar h2 {
+      animation: fadeIn 1s ease-in-out, pulse 2s infinite;
+    }
+    
+    /* Background animation for a stormy effect */
+    @keyframes stormyBackground {
+      0% {
+        background-color: rgba(23, 42, 58, 0.9);
+      }
+      50% {
+        background-color: rgba(18, 33, 46, 0.9);
+      }
+      100% {
+        background-color: rgba(23, 42, 58, 0.9);
+      }
+    }
+    
+    .sidebar {
+      animation: stormyBackground 5s infinite;
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .toggle-theme {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff5f5f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-theme:hover {
+      background-color: #ff3f3f;
+    }
+
+    .audio-control {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #ff5f5f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .audio-control:hover {
+      background-color: #ff3f3f;
+    }
+
+    .input-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .input-controls button {
+      background-color: #ff5f5f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .input-controls button:hover {
+      background-color: #ff3f3f;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      resize: none;
+    }
+    .mb{
+      margin-bottom: -70px;
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard-container">
+  <div class="sidebar" style="width:20%;">
+    <h2>{% if user.is_authenticated %}My Dashboard{% else %}Wel Come{% endif %}</h2>
+    <ul>
+      {% if user.is_authenticated %}
+      <li><a href="/">Home</a></li>
+      {% if user.is_staff %}
+      <li><a href="{% url 'raise_alert' %}">Raise Alert</a></li>
+      {% else %}
+
+      {% endif %}
+      <li><a href="{% url 'recent_alert' %}">Recent Alerts</a></li>
+      <li><a href="logout">Logout</a></li>
+      {% else %}
+      <li><a href="register">Register</a></li>
+      <li><a href="login">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  <div style="overflow-y:scroll;width:80%;">
+    <div style="min-height:80vh;">
+      {% block main %}{% endblock %}
+    </div>
+    <footer>
+      <div class="footer-content">
+          <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <div class="contact-info">
+              <a href="mailto:info@example.com"><i class="fas fa-envelope"></i> info@example.com</a>
+              <span><i class="fas fa-phone"></i> +123 456 7890</span>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          &copy; 2023  All rights reserved.
+      </div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<style>
+    .environment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .environment-table th,
+      .environment-table td {
+        padding: 12px 15px;
+        text-align: center;
+      }
+      
+      .environment-table th {
+        background-color: rgba(23, 42, 58, 0.9); /* Dark blue-gray for headers */
+        color: #ff5f5f; /* Red for urgency */
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      
+      .environment-table tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .environment-table tbody tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      
+      .environment-table tbody tr:hover {
+        background-color: rgba(255, 95, 95, 0.1); /* Red hover effect */
+      }
+      
+      .environment-table tbody td {
+        color: #ccc; /* Light gray for readability */
+      }
+      
+      .environment-table tbody td:first-child {
+        font-weight: bold;
+        color: #ff5f5f; /* Red for location names */
+      }
+        .notification-box {
+            width: 500px;
+            background-color: rgba(255, 95, 95, 0.2); /* Semi-transparent red background */
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.836);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        .notification-box h3 {
+            color: #ff5f5f; /* Red for headings */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+    
+        .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    
+        .no-messages {
+            color: rgba(255, 255, 255, 0.7); /* Light gray for no messages */
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+        }
+    
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .notification-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    
+        .notification-icon {
+            font-size: 18px;
+            margin-right: 10px;
+            color: #ff5f5f; /* Red for icons */
+        }
+    
+        .notification-text {
+            color: #fff; /* White for text */
+            font-size: 14px;
+        }
+    
+        /* Scrollbar Styling */
+        .notification-list::-webkit-scrollbar {
+            width: 8px;
+        }
+    
+        .notification-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+    
+        .notification-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 95, 95, 0.8);
+            border-radius: 4px;
+        }
+    
+        .notification-list::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 95, 95, 1);
+        }
+    </style>
+</style>
+<div class="content">
+    <h1 ><marquee>AI powered one touch in Natural Calamities emergency services</marquee></h1>
+  </div>
+{% if user.is_authenticated %}
+<div style="display: flex;justify-content:center;align-items:center;height:60vh">
+    <div class="notification-box">
+        <h3>Notifications</h3>
+        <div class="notification-list">
+          {% if alt %}
+            <div class="notification-item">
+                <span class="notification-icon">🔔</span>
+                <span class="notification-text">New alert {{alt.message}} <br> Raised by : {{alt.raise_by.username}} <br> at :{{alt.created_at}}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="content">
+    <h2>Environmental Conditions</h2>
+    <table class="environment-table">
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Temperature (°C)</th>
+          <th>Humidity (%)</th>
+          <th>Air Quality (AQI)</th>
+          <th>Wind Speed (km/h)</th>
+          <th>Precipitation (mm)</th>
+          <th>Condition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Region X</td>
+          <td>28</td>
+          <td>65</td>
+          <td>45 (Good)</td>
+          <td>15</td>
+          <td>0</td>
+          <td>Clear</td>
+        </tr>
+        <tr>
+          <td>Region Y</td>
+          <td>22</td>
+          <td>80</td>
+          <td>120 (Unhealthy)</td>
+          <td>30</td>
+          <td>5</td>
+          <td>Rainy</td>
+        </tr>
+        <tr>
+          <td>Region Z</td>
+          <td>35</td>
+          <td>40</td>
+          <td>300 (Hazardous)</td>
+          <td>10</td>
+          <td>0</td>
+          <td>Smoky</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+{% endblock %}

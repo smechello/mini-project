@@ -8,26 +8,22 @@
         justify-content: center;
         align-items: center;
         min-height: 80vh;
-        padding: 20px;
+        margin: 0;
     }
     .inLoginForm {
         background-color:  #ff5f5f41;
         backdrop-filter: blur(10px);
         padding: 30px;
         border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        width: 600px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.836);
+        max-width: 400px;
+        width: 100%;
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
-
     .inputGroup {
         margin-bottom: 20px;
     }
-    .form-columns{
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        gap: 15px;
-    }
+
     .inputGroup label {
         display: block;
         margin-bottom: 8px;
@@ -35,7 +31,6 @@
         font-size: 14px;
         font-weight: 500;
     }
-
     .inputGroup input {
         width: 94%;
         padding: 12px;
@@ -46,17 +41,14 @@
         font-size: 14px;
         transition: border-color 0.3s ease, background 0.3s ease;
     }
-
     .inputGroup input:focus {
         border-color: #181817;
         background: rgba(255, 255, 255, 0.2);
         outline: none;
     }
-
     .inputGroup input::placeholder {
         color: rgba(255, 255, 255, 0.7);
     }
-
     .submitForm {
         width: 100%;
         padding: 12px;
@@ -69,12 +61,10 @@
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
-
     .submitForm:hover {
         background: rgba(0, 0, 0, 0.959);
         transform: translateY(-2px);
     }
-
     .submitForm:active {
         transform: translateY(0);
     }
@@ -82,7 +72,6 @@
     p {
         margin-top: 15px;
     }
-
     p a {
         color: rgb(0, 0, 0);
         text-decoration: none;
@@ -90,14 +79,12 @@
         transition: color 0.3s ease;
         margin: 0;
     }
-
     p a:hover {
         color: rgba(0, 0, 0, 0.8);
     }
-
     .message {
         text-align: center;
-        color: #ff4d4d;
+        color: #0345d3;
         font-size: 14px;
         margin-bottom: 15px;
     }
@@ -111,25 +98,16 @@
         letter-spacing: 2px;
     }
 
-    /* Responsive Design */
     @media (max-width: 600px) {
-        .form-columns{
-            display: grid;
-            grid-template-columns: repeat(1,1fr);
-            gap: 1px;
-        }
         .inFormBackground {
             padding: 10px;
         }
-
         .inLoginForm {
             padding: 20px;
         }
-
         .inputGroup input {
             padding: 10px;
         }
-
         .submitForm {
             padding: 10px;
         }
@@ -137,41 +115,26 @@
 </style>
 <div class="inFormBackground">
     <div class="inLoginForm">
-        <h2>New Sign up</h2>
+        <h2>Sign IN</h2>
         <form action="" method="post">
             {% csrf_token %}
             {% if messages %}
                 {% for message in messages %}
-                    <p>{{ message }}</p>
+                    <p class="message">{{ message }}</p>
                 {% endfor %}
             {% endif %}
             <div class="form-columns">
                 <div class="inputGroup">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter Name" required>
-                </div>
-                <div class="inputGroup">
-                    <label for="mobile">Mobile</label>
-                    <input type="tel" id="mobile" name="mobile" placeholder="Enter Mobile Number" required>
-                </div>
-                <div class="inputGroup">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter Email" required>
-                </div>
-                <div class="inputGroup">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter Username"  minlength="4" required>
+                    <input type="text" id="username" name="username" placeholder="Enter Username" required>
                 </div>
                 <div class="inputGroup">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter Password" pattern="^(?=.*[a-zA-Z])(?=.*\d).+$"  title="Password must be at least 8 characters long, and contain both letters and numbers." required>
+                    <input type="password" id="password" name="password" placeholder="Enter Password" required>
                 </div>
-                <div class="inputGroup">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="cnfm_password" placeholder="Enter Password" pattern="^(?=.*[a-zA-Z])(?=.*\d).+$" required>
-                </div>
+                <p><a href="{% url 'password_reset' %}">Forgot password ...?</a></p>
             </div>
-            <button class="submitForm">Register</button>
+            <button class="submitForm">login </button>
         </form>
     </div>
 </div>
