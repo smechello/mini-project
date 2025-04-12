@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Reactivate Account {% endblock %}
+
+{% block main %}
+<style>
+    /* General Styles */
+    .section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        padding: 20px;
+    }
+
+    .section .section-body {
+        max-width: 700px;
+        width: 100%;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+    }
+
+    .section h2 {
+        color: #fff;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .section p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-decoration: none;
+    }
+
+    .submit-btn:hover {
+        background-color: rgb(0, 0, 0);
+        transform: translateY(-2px);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .section div {
+            padding: 20px;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+    }
+</style>
+<div class="section">
+    <div class="section-body">
+        <h2>Hi {{ username.username }}</h2>
+        <p>Your account is currently deactivated. To reactivate your account, please click the button below. An activation email will be sent to <strong>{{ user.email }}</strong>.</p>
+        
+        <a class="submit-btn" href="{% url 'reactivate_account' uidb64=uid %}">
+            Activate Account
+        </a>
+    </div>
+</div>
+
+{% endblock %}
